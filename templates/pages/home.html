@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}
+homepage
+{% endblock head_title %}
+
+{% block content %}
+<h1 class="display-2">Welcome to Herring</h1>
+
+<div id="fillets">
+  Loading...
+</div>
+
+<script src="{% static 'fillets/printFillets.js' %}"></script>
+
+{% endblock content %}
