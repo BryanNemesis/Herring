@@ -1,3 +1,5 @@
+import random
+
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
@@ -15,7 +17,7 @@ def fillet_list_view(request, *args, **kwargs):
     Return json data
     """
     qs = Fillet.objects.all()
-    fillet_list = [{'id': x.id, 'text': x.text} for x in qs]
+    fillet_list = [{'id': x.id, 'text': x.text, 'like_count': random.randint(0, 999)} for x in qs]
     data = {
         'isUser': False,
         'response': fillet_list,

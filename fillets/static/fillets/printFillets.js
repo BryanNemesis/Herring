@@ -20,7 +20,18 @@ xhr.onload = function () {
 xhr.send()
 
 function formatFilletElement(fillet) {
-  let formattedFilletElement = "<div class='mb-4 fillet' id='fillet-" + fillet.id + "'><p>" + fillet.text + "</p></div>"
+  return "<div class='col-12 col-md-10 mx-auto border rounded py-3 mb-4 fillet' id='fillet-"
+    + fillet.id + "'><p>"
+    + fillet.text + "</p><div class='btn-group'>"
+    + likeButton(fillet) + "</div></div>"
+}
 
-  return formattedFilletElement
+function likeButton(fillet) {
+    return "<button class='btn btn-primary btn-sm bg-herring-light' onclick='handleLiked("
+     + fillet.id + ", "
+     + fillet.like_count + ")'>" + fillet.like_count + " Likes</button>"
+}
+
+function handleLiked(filletId, likeCount) {
+    console.log("Fillet no " + filletId + " has " + likeCount + " likes")
 }
