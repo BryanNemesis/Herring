@@ -7,10 +7,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <title>Herring {% block head_title %}{% endblock head_title %}</title>
+    <style>
+      .bg-herring-dark {
+      background-color: #003e6f;
+      }
+      .bg-herring-light {
+      background-color: #5481c5;
+      border-color: #3c5c8c;
+      }
+    </style>
   </head>
   <body>
-  {% block content %}
-  {% endblock %}
+  {% include 'components/navbar.html' %}
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+  {% include 'components/footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
   </body>
