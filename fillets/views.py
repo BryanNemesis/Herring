@@ -1,8 +1,11 @@
 import random
 
+from django.conf import settings
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.utils.http import is_safe_url
 
+from .forms import FilletForm
 from .models import Fillet
 
 
@@ -44,3 +47,13 @@ def fillet_detail_view(request, fillet_id, *args, **kwargs):
         status = 404
 
     return JsonResponse(data, status=status)
+
+
+def fillet_create_view(request, *args, **kwargs):
+    form = FilletForm(request.POST or None)
+    next_url = request.POST.get('next') or None
+    if form.is_valid():
+        obj = form.save()
+        form = FilletForm
+        if next_url is not None and is_safe_url(next_url, settings.ALLOWED_HOSTS):
+            return redirect(next_url)
