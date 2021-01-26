@@ -54,6 +54,7 @@ def fillet_create_view(request, *args, **kwargs):
     next_url = request.POST.get('next') or None
     if form.is_valid():
         obj = form.save()
-        form = FilletForm
+        if request.is_ajax():
+            return JsonResponse(obj.serialize(), status=201)
         if next_url is not None and is_safe_url(next_url, settings.ALLOWED_HOSTS):
             return redirect(next_url)
