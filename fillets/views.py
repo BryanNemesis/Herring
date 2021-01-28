@@ -58,3 +58,6 @@ def fillet_create_view(request, *args, **kwargs):
             return JsonResponse(obj.serialize(), status=201)
         if next_url is not None and is_safe_url(next_url, settings.ALLOWED_HOSTS):
             return redirect(next_url)
+    if form.errors:
+        if request.is_ajax():
+            return JsonResponse(form.errors, status=400)

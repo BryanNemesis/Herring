@@ -17,8 +17,9 @@ homepage
   <div class="col-md-4 mx-auto col-10">
     <form class="form" id="fillet-create-form" method="POST" action="create-fillet/">
       {% csrf_token %}
+      <div class="d-none alert alert-danger" id="fillet-create-form-error"></div>
       <input type="hidden" value="/" name="next">
-      <textarea class="form-control mb-2" name="text" placeholder="Your fillet..."></textarea>
+      <textarea required='required' class="form-control mb-2" name="text" placeholder="Your fillet..."></textarea>
       <button type="submit" class="btn btn-secondary">Post</button>
     </form>
   </div>

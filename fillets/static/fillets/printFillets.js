@@ -1,7 +1,7 @@
-var filletsElement = document.querySelector('#fillets')
+var filletsContainerElement = document.querySelector('#fillets')
 var filletCreateElement = document.querySelector('#fillet-create-form')
 
-loadFillets(filletsElement)
+loadFillets(filletsContainerElement)
 filletCreateElement.addEventListener('submit', handleFilletCreateFormSubmit)
 
 function handleFilletCreateFormSubmit(event) {
@@ -10,20 +10,47 @@ function handleFilletCreateFormSubmit(event) {
     myForm = event.target,
     url = myForm.getAttribute("action"),
     method = myForm.getAttribute("method"),
-    myFormData = new FormData(myForm)
+    myFormData = new FormData(myForm),
+    responseType = 'json'
 
     // send a POST request to url /create-fillet, which fires up fillet_create_view and returns stuff
     // into xhr.response!!
-    xhr.open(method, url)
+    xhr.responseType = responseType
+    xhr.open(method, url, responseType)
     // this will make request.is_ajax() return True
     xhr.setRequestHeader('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest')
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
     xhr.onload = function () {
-        let serverResponse = xhr.response
-        loadFillets(filletsElement)
-        console.log(xhr.response)
+        if (xhr.status === 201) {
+            handleFilletFormError('', false)
+            let newFilletJson = xhr.response
+            let newFilletElement = formatFilletElement(newFilletJson)
+            let originalHtml = filletsContainerElement.innerHTML
+            filletsContainerElement.innerHTML = newFilletElement + originalHtml
+            myForm.reset()
+        } else if (xhr.status === 400) {
+            errorJson = xhr.response
+            if (errorJson.text[0]) {
+                handleFilletFormError(errorJson.text[0], true)
+            }
+            else {
+                alert("Could not post fillet. Please try again")
+            }
+        } else if (xhr.status === 500) {
+            alert("A server error occured. Please try again")
+        }
     }
     xhr.send(myFormData)
+}
+
+function handleFilletFormError(msg, display) {
+    let errorDiv = document.querySelector('#fillet-create-form-error')
+    if (display === true) {
+        errorDiv.setAttribute('class', 'alert alert-danger')
+        errorDiv.innerHTML = msg
+    } else {
+        errorDiv.setAttribute('class', 'd-none alert alert-danger')
+    }
 }
 
 function loadFillets(filletsElement) {
@@ -38,7 +65,7 @@ function loadFillets(filletsElement) {
       let serverResponse = xhr.response
       let listedItems = serverResponse.response
       let finalFilletStr = ''
-      for (let i=listedItems.length-1; i>=0; i--) {
+      for (let i=0; i<listedItems.length; i++) {
           finalFilletStr += formatFilletElement(listedItems[i])
         }
       filletsElement.innerHTML = finalFilletStr
