@@ -16,7 +16,7 @@ class FilletForm(forms.ModelForm):
         text = self.cleaned_data.get('text')
         if len(text) > MAX_FILLET_LENGTH:
             raise forms.ValidationError(f"Fillets can't be longer than {MAX_FILLET_LENGTH} characters.")
-        censor_text(text)
+        self.censor_text(text)
         return text
 
     @staticmethod
