@@ -19,7 +19,7 @@ def fillet_list_view(request, *args, **kwargs):
     Consumed by js
     Return json data
     """
-    qs = Fillet.objects.all()
+    qs = Fillet.objects.all()[:20]
     fillet_list = [x.serialize() for x in qs]
     data = {
         'isUser': False,
