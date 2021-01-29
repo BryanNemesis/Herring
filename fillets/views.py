@@ -50,10 +50,15 @@ def fillet_detail_view(request, fillet_id, *args, **kwargs):
 
 
 def fillet_create_view(request, *args, **kwargs):
+    if not request.user.is_authenticated:
+        if request.is_ajax():
+            return JsonResponse({}, status=401)
     form = FilletForm(request.POST or None)
     next_url = request.POST.get('next') or None
     if form.is_valid():
-        obj = form.save()
+        obj = form.save(commit=False)
+        obj.user = request.user
+        obj.save()
         if request.is_ajax():
             return JsonResponse(obj.serialize(), status=201)
         if next_url is not None and is_safe_url(next_url, settings.ALLOWED_HOSTS):

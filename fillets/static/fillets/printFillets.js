@@ -34,10 +34,12 @@ function handleFilletCreateFormSubmit(event) {
                 handleFilletFormError(errorJson.text[0], true)
             }
             else {
-                alert("Could not post fillet. Please try again")
+                handleFilletFormError('Could not post fillet. Please try again.', true)
             }
+        } else if (xhr.status === 401) {
+            handleFilletFormError('Please log in to post a fillet.', true)
         } else if (xhr.status === 500) {
-            alert("A server error occured. Please try again")
+            handleFilletFormError('A server error occured. Please try again.', true)
         }
     }
     xhr.send(myFormData)
