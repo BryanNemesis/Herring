@@ -16,12 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from fillets.views import home_view, fillet_list_view, fillet_detail_view, fillet_create_view
+from fillets.views import (
+    home_view,
+    fillet_list_view,
+    fillet_detail_view,
+    fillet_create_view,
+    fillet_delete_view,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view),
     path('fillets/', fillet_list_view),
     path('fillets/<int:fillet_id>/', fillet_detail_view),
-    path('create-fillet/', fillet_create_view)
+    path('create-fillet/', fillet_create_view),
+    path('api/fillets/<int:fillet_id>/delete', fillet_delete_view),
 ]

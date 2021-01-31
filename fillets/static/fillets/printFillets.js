@@ -30,13 +30,13 @@ function handleFilletCreateFormSubmit(event) {
             myForm.reset()
         } else if (xhr.status === 400) {
             errorJson = xhr.response
-            if (errorJson.text[0]) {
+            if (errorJson.text) {
                 handleFilletFormError(errorJson.text[0], true)
             }
             else {
                 handleFilletFormError('Could not post fillet. Please try again.', true)
             }
-        } else if (xhr.status === 401) {
+        } else if (xhr.status === 403) {
             handleFilletFormError('Please log in to post a fillet.', true)
         } else if (xhr.status === 500) {
             handleFilletFormError('A server error occured. Please try again.', true)
@@ -65,7 +65,7 @@ function loadFillets(filletsElement) {
     xhr.open(method, url)
     xhr.onload = function () {
       let serverResponse = xhr.response
-      let listedItems = serverResponse.response
+      let listedItems = serverResponse
       let finalFilletStr = ''
       for (let i=0; i<listedItems.length; i++) {
           finalFilletStr += formatFilletElement(listedItems[i])
