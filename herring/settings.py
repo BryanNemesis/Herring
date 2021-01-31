@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
+MAX_FILLET_LENGTH = 255
+
+BAD_WORDS = ['pupa', 'siusiak', 'kurcze', 'kurde']
+
+FILLET_ACTION_OPTIONS = ['like', 'unlike', 'repost']
 
 # Application definition
 
@@ -120,3 +125,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DEFAULT_RENDERER_CLASSES = [
+    'rest_framework.renderers.JSONRenderer',
+]
+
+if DEBUG:
+    DEFAULT_RENDERER_CLASSES += [
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
