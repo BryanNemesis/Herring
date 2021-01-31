@@ -57,6 +57,36 @@ def fillet_delete_view(request, fillet_id, *args, **kwargs):
     return Response({'message': f'Fillet {obj} deleted successfully'}, status=200)
 
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def fillet_action_view(request, *args, **kwargs):
+    """
+    id is required.
+    action options are: like, unlike, repost.
+    """
+    serializer = FilletActionSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        data = serializer.validated_data
+        fillet_id = data.get('id')
+        action = data.get('action')
+
+        qs = Fillet.objects.filter(pk=fillet_id)
+        if not qs.exists():
+            return Response({}, status=404)
+        obj = qs.first()
+
+        if action == 'like':
+            obj.likes.add(request.user)
+            return Response(serializer.data, status=200)
+        elif action == 'unlike':
+            obj.likes.remove(request.user)
+        elif action == 'repost':
+            # TODO
+            pass
+
+        return Response({}, status=200)
+
+
 def fillet_list_view_pure_django(request, *args, **kwargs):
     """
     REST API view

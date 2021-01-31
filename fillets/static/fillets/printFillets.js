@@ -79,15 +79,59 @@ function formatFilletElement(fillet) {
   return "<div class='col-12 col-md-10 mx-auto border rounded py-3 mb-4 fillet' id='fillet-"
     + fillet.id + "'><p>"
     + fillet.text + "</p><div class='btn-group'>"
-    + likeButton(fillet) + "</div></div>"
+    + likeButton(fillet) + unlikeButton(fillet) + repostButton(fillet) + "</div></div>"
 }
 
 function likeButton(fillet) {
-    return "<button class='btn btn-primary btn-sm bg-herring-light' onclick='handleLiked("
-     + fillet.id + ", "
-     + fillet.like_count + ")'>" + fillet.like_count + " Likes</button>"
+    // correct this, unreadable
+    return '<button class="btn btn-primary btn-sm bg-herring-light" onclick="handleFilletAction('
+     + fillet.id + ',' + fillet.like_count + ",'like')\">" + fillet.like_count + ' Likes</button>'
 }
 
-function handleLiked(filletId, likeCount) {
-    console.log("Fillet no " + filletId + " has " + likeCount + " likes")
+function unlikeButton(fillet) {
+    // correct this, unreadable
+    return '<button class="btn btn-outline-primary btn-sm outline-herring-light" onclick="handleFilletAction('
+     + fillet.id + ',' + fillet.like_count + ",'unlike')\">" + 'Unlike</button>'
+}
+
+function repostButton(fillet) {
+    // correct this, unreadable
+    return '<button class="btn btn-outline-primary btn-sm outline-herring-light" onclick="handleFilletAction('
+     + fillet.id + ',' + fillet.like_count + ",'repost')\">" + 'Repost</button>'
+}
+
+function handleFilletAction(filletId, likeCount, action) {
+    let url = "/api/fillets/action"
+    let method = 'POST'
+    data = JSON.stringify({
+        id: filletId,
+        action: action
+    })
+    let xhr = new XMLHttpRequest()
+    xhr.open(method, url)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.setRequestHeader('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest')
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+    var csrftoken = getCookie('csrftoken')
+    xhr.setRequestHeader('X-CSRFToken', csrftoken)
+    xhr.onload = function() {
+        loadFillets(filletsContainerElement)
+    }
+    xhr.send(data)
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }

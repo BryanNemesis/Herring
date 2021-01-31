@@ -22,6 +22,7 @@ from fillets.views import (
     fillet_detail_view,
     fillet_create_view,
     fillet_delete_view,
+    fillet_action_view,
 )
 
 urlpatterns = [
@@ -31,4 +32,5 @@ urlpatterns = [
     path('fillets/<int:fillet_id>/', fillet_detail_view),
     path('create-fillet/', fillet_create_view),
     path('api/fillets/<int:fillet_id>/delete', fillet_delete_view),
+    path('api/fillets/action', fillet_action_view)
 ]
