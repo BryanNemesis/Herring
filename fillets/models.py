@@ -13,10 +13,10 @@ class Fillet(models.Model):
     image = models.FileField('/images/costamn ', blank=True, null=True)
 
     def __str__(self):
-        if len(self.text) > 30:
-            return self.text[:30] + '...'
+        if len(self.text) > 20:
+            return f'Fillet {self.id}: {self.text[:20]}...'
         else:
-            return self.text
+            return f'Fillet {self.id}: {self.text}'
 
     class Meta:
         ordering = ['-id']
