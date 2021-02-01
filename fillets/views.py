@@ -83,7 +83,7 @@ def fillet_action_view(request):
             repost = Fillet.objects.create(
                 user=request.user,
                 parent=obj,
-                text=repost_test,
+                text=repost_text,
             )
             serializer = FilletSerializer(repost)
             return Response(serializer.data, status=200)
