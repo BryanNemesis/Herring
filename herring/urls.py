@@ -28,9 +28,10 @@ from fillets.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view),
-    path('fillets/', fillet_list_view),
-    path('fillets/<int:fillet_id>/', fillet_detail_view),
-    path('create-fillet/', fillet_create_view),
+    path('api/create-fillet/', fillet_create_view),
+    path('api/fillets/', fillet_list_view),
+    path('api/fillets/<int:fillet_id>/', fillet_detail_view),
     path('api/fillets/<int:fillet_id>/delete', fillet_delete_view),
     path('api/fillets/action', fillet_action_view)
+
 ]

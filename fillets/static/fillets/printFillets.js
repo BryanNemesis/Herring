@@ -58,7 +58,7 @@ function handleFilletFormError(msg, display) {
 function loadFillets(filletsElement) {
     let xhr = new XMLHttpRequest(),
     method = 'GET',
-    url = '/fillets',
+    url = '/api/fillets',
     responseType = 'json'
 
     xhr.responseType = responseType
