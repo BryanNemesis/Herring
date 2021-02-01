@@ -6,7 +6,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import FilletSerializer, FilletActionSerializer
+from .serializers import (
+    FilletSerializer,
+    FilletCreateSerializer,
+    FilletActionSerializer,
+)
 from .models import Fillet
 
 
@@ -34,7 +38,7 @@ def fillet_detail_view(request, fillet_id):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def fillet_create_view(request):
-    serializer = FilletSerializer(data=request.POST)
+    serializer = FilletCreateSerializer(data=request.POST)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=201)
@@ -87,5 +91,3 @@ def fillet_action_view(request):
             )
             serializer = FilletSerializer(repost)
             return Response(serializer.data, status=200)
-
-        return Response({}, status=200)

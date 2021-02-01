@@ -16,7 +16,7 @@ class FilletActionSerializer(serializers.Serializer):
         return value
 
 
-class FilletSerializer(serializers.ModelSerializer):
+class FilletCreateSerializer(serializers.ModelSerializer):
     like_count = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -41,3 +41,16 @@ class FilletSerializer(serializers.ModelSerializer):
             if bad_word in text.lower():
                 raise serializers.ValidationError(
                     f"Fillets cannot contain forbidden word '{bad_word.title()}'. Please be polite!")
+
+
+class FilletSerializer(serializers.ModelSerializer):
+    like_count = serializers.SerializerMethodField(read_only=True)
+    parent = FilletCreateSerializer(read_only=True)
+
+    class Meta:
+        model = Fillet
+        fields = ['id', 'text', 'like_count', 'is_repost', 'parent']
+
+    def get_like_count(self, obj):
+        return obj.likes.count()
+
