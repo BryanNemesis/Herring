@@ -1,8 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-import random
-
 
 User = settings.AUTH_USER_MODEL
 
@@ -32,10 +30,3 @@ class Fillet(models.Model):
 
     class Meta:
         ordering = ['-id']
-
-    def serialize(self):
-        return {
-            'id': self.id,
-            'text': self.text,
-            'like_count': random.randint(0, 1000),
-        }
