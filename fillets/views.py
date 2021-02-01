@@ -69,6 +69,7 @@ def fillet_action_view(request, *args, **kwargs):
         data = serializer.validated_data
         fillet_id = data.get('id')
         action = data.get('action')
+        repost_text = data.get('text')
 
         qs = Fillet.objects.filter(pk=fillet_id)
         if not qs.exists():
@@ -77,12 +78,18 @@ def fillet_action_view(request, *args, **kwargs):
 
         if action == 'like':
             obj.likes.add(request.user)
+            serializer = FilletSerializer(obj)
             return Response(serializer.data, status=200)
         elif action == 'unlike':
             obj.likes.remove(request.user)
         elif action == 'repost':
-            # TODO
-            pass
+            repost = Fillet.objects.create(
+                user=request.user,
+                parent=obj,
+                text=repost_test,
+            )
+            serializer = FilletSerializer(repost)
+            return Response(serializer.data, status=200)
 
         return Response({}, status=200)
 

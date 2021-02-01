@@ -17,6 +17,7 @@ class FilletLike(models.Model):
 
 
 class Fillet(models.Model):
+    parent = models.ForeignKey('self', null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(blank=True, null=True)
     likes = models.ManyToManyField(User, related_name='fillet_user', blank=True, through=FilletLike)
