@@ -30,3 +30,7 @@ class Fillet(models.Model):
 
     class Meta:
         ordering = ['-id']
+
+    @property
+    def is_repost(self):
+        return self.parent is not None
