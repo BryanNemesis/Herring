@@ -14,5 +14,5 @@ urlpatterns = [
     path('action/', fillet_action_view),
     path('create/', fillet_create_view),
     path('<int:fillet_id>/', fillet_detail_view),
-    path('<int:fillet_id>/delete', fillet_delete_view),
+    path('<int:fillet_id>/delete/', fillet_delete_view),
 ]

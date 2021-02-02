@@ -83,6 +83,8 @@ def fillet_action_view(request):
             return Response(serializer.data, status=200)
         elif action == 'unlike':
             obj.likes.remove(request.user)
+            serializer = FilletSerializer(obj)
+            return Response(serializer.data, status=200)
         elif action == 'repost':
             repost = Fillet.objects.create(
                 user=request.user,
@@ -90,4 +92,5 @@ def fillet_action_view(request):
                 text=repost_text,
             )
             serializer = FilletSerializer(repost)
-            return Response(serializer.data, status=200)
+            return Response(serializer.data, status=201)
+
