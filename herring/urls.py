@@ -14,8 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
+from django.urls import path, include
 from fillets.views import (
     home_view,
     fillet_list_view,
@@ -28,10 +27,10 @@ from fillets.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view),
-    path('api/create-fillet/', fillet_create_view),
-    path('api/fillets/', fillet_list_view),
-    path('api/fillets/<int:fillet_id>/', fillet_detail_view),
-    path('api/fillets/<int:fillet_id>/delete', fillet_delete_view),
-    path('api/fillets/action', fillet_action_view)
-
+    path('create-fillet/', fillet_create_view),
+    path('fillets/', fillet_list_view),
+    path('fillets/<int:fillet_id>/', fillet_detail_view),
+    # path('api/fillets/<int:fillet_id>/delete', fillet_delete_view),
+    # path('api/fillets/action', fillet_action_view),
+    path('api/fillets/', include('fillets.urls')),
 ]
