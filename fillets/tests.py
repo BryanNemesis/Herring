@@ -63,6 +63,8 @@ class FilletTestCase(TestCase):
         fillet_id = response.json().get('id')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(fillet_id, 1)
+        response = self.client.get('/api/fillets/5/')
+        self.assertEqual(response.status_code, 404)
 
     def test_delete(self):
         response = self.client.delete('/api/fillets/1/delete/')
