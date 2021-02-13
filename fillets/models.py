@@ -23,10 +23,13 @@ class Fillet(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        if len(self.text) > 20:
-            return f'Fillet {self.id}: {self.text[:20]}...'
+        if self.text:
+            if len(self.text) > 20:
+                return f'Fillet {self.id}: {self.text[:20]}...'
+            else:
+                return f'Fillet {self.id}: {self.text}'
         else:
-            return f'Fillet {self.id}: {self.text}'
+            return f'Fillet {self.id} - repost'
 
     class Meta:
         ordering = ['-id']
