@@ -4,6 +4,8 @@ __pycache__/
 migrations/
 db.sqlite3
 node_modules/
-/.pnp
+.pnp
 .pnp.js
 herring-web/.eslintcache
+coverage
+build/
