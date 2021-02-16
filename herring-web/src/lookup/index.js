@@ -1,3 +1,9 @@
-import loadFillets from './components'
+import {apiFilletCreate, apiFilletList, apiFilletAction} from './components'
 
-export default loadFillets
+export {
+    apiFilletCreate,
+    apiFilletList,
+    apiFilletAction
+}
+
+export default apiFilletList
