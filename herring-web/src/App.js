@@ -1,5 +1,5 @@
 import './App.css';
-import FilletsElement from './filletsElement';
+import FilletsElement from './fillets';
 import Logo from './Logo.png';
 
 function App() {
