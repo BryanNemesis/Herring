@@ -38,7 +38,7 @@ def fillet_detail_view(request, fillet_id):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def fillet_create_view(request):
-    serializer = FilletCreateSerializer(data=request.POST)
+    serializer = FilletCreateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=201)
