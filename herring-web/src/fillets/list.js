@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import apiFilletList from '../lookup'
+import {apiFilletList} from '../lookup'
 import Fillet from './detail'
 
 function FilletList({newFillets, setNewFillets, username}) {

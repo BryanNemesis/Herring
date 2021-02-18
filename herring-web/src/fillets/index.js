@@ -1,3 +1,8 @@
-import FilletsElement from './components'
+import {FilletsComponent, FilletDetailComponent} from './components'
 
-export default FilletsElement
+export {
+    FilletsComponent,
+    FilletDetailComponent
+}
+
+export default FilletsComponent

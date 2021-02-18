@@ -1,5 +1,5 @@
 import React from 'react'
-import apiFilletCreate from '../lookup'
+import {apiFilletCreate} from '../lookup'
 
 function FilletCreateForm({newFillets, setNewFillets}) {
     const textAreaRef = React.createRef()
@@ -13,6 +13,7 @@ function FilletCreateForm({newFillets, setNewFillets}) {
     }
   
     const handleBackendUpdate = (response, status) => {
+      console.log(response, status)
       // api response handler
       if (status === 201) {
         const tempNewFillets = [...newFillets]
