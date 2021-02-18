@@ -1,11 +1,12 @@
 .py[cod]
 __pycache__/
 .idea/
+.vscode/
 migrations/
 db.sqlite3
 node_modules/
 .pnp
 .pnp.js
-herring-web/.eslintcache
+.eslintcache
 coverage
 build/
