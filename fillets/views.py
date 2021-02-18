@@ -20,8 +20,11 @@ def home_view(request):
 
 @api_view(['GET'])
 def fillet_list_view(request):
-    qs = Fillet.objects.all()[:20]
-    serializer = FilletSerializer(qs, many=True)
+    qs = Fillet.objects.all()
+    username = request.GET.get('username')
+    if username:
+        qs = qs.filter(user__username__iexact=username)
+    serializer = FilletSerializer(qs[:20], many=True)
     return Response(serializer.data)
 
 
