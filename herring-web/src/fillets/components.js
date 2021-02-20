@@ -29,7 +29,7 @@ export function FilletDetailComponent({filletId}) {
       alert('Error: could not find fillet.')
     }
   }
-  
+
   useEffect(() => {
     if (didLookup === false) {
       apiFilletDetail(filletId, handleBackendLookup)
