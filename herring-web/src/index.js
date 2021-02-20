@@ -1,18 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import {FilletsComponent, FilletDetailComponent} from './fillets'
-
 
 const e = React.createElement
 
-
-const appElement = document.getElementById('root')
-if (appElement) {
-  ReactDOM.render(e(App, appElement.dataset), appElement)
-}
-
-const herringElement = document.getElementById('Herring')
+const herringElement = document.getElementById('herring')
 if (herringElement) {
   ReactDOM.render(
     e(FilletsComponent, herringElement.dataset), herringElement)
