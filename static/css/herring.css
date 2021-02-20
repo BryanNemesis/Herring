@@ -1,0 +1,18 @@
+.bg-herring-dark {
+    background-color: #003e6f;
+    }
+
+.btn-dark {
+    background-color: #5481c5;
+    border-color: #3c5c8c;
+    color: #ffffff;
+    }
+
+.btn-light {
+    border-color: #3c5c8c;
+    color: #003e6f;
+    }
+
+.btn-sm:hover {
+    background-color: #71d4ff;
+    }
