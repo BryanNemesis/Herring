@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('fillets.urls')),
     path('', include('accounts.urls')),
+    path('profile/', include('profiles.urls')),
     path('api/fillets/', include('fillets.api.urls')),
 ]
 

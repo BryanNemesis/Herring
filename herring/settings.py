@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     'fillets',
     'accounts',
+    'profiles',
 ]
 
 MIDDLEWARE = [
