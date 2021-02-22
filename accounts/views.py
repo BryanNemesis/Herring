@@ -34,7 +34,7 @@ def register_view(request):
     if form.is_valid():
         user = form.save()
         user.set_password (form.cleaned_data.get('password1'))
-        return redirect('/')
+        return redirect('/login')
     context = {
         'form': form,
         'btn_label': 'Register',
