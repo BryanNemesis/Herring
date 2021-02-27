@@ -6,6 +6,7 @@ function FilletList({newFillets, setNewFillets, username}) {
     const [fillets, setFillets] = useState([])
     const [filletsInit, setFilletsInit] = useState(newFillets ? newFillets : [])
     const [filletsDidSet, setFilletsDidSet] = useState(false)
+    const [nextUrl, setNextUrl] = useState(null)
     
     useEffect(() => {
       let finalFillets = [...newFillets].concat(filletsInit)
@@ -19,7 +20,8 @@ function FilletList({newFillets, setNewFillets, username}) {
         const handleFilletListLookup = (response, status) => {
           if (status === 200)
           {
-            setFilletsInit(response)
+            setNextUrl(response.next)
+            setFilletsInit(response.results)
             setFilletsDidSet(true)
           } else {
             alert('You have error :-D')
@@ -35,15 +37,39 @@ function FilletList({newFillets, setNewFillets, username}) {
       setNewFillets(tempNewFillets)
     }
   
+    const handleLoadNext = (event) => {
+      event.preventDefault()
+      if (nextUrl !== null) {
+        const handleLoadNextReponse = (response, status) => {
+          if (status === 200)
+          {
+            setNextUrl(response.next)
+            const newFillets = [...fillets].concat(response.results)
+            setFillets(newFillets)
+            setFilletsInit(newFillets)
+          } else {
+            alert('You have error :-D')
+          }
+        }
+        apiFilletList(username, handleLoadNextReponse, nextUrl)
+      }
+    }
+
     return (
-      <div> 
-          {fillets.map((x) => {
-            return <Fillet 
-            fillet={x}
-            handleRepost={handleRepost}
-            key={x.id} />
-          })}
-      </div>
+      <> 
+        {fillets.map((x) => {
+          return <Fillet 
+          fillet={x}
+          handleRepost={handleRepost}
+          key={x.id} />
+        })}
+        {nextUrl !== null &&
+        <button
+        onClick={handleLoadNext}
+        className='btn btn-outline-primary btn-sm btn-dark'>
+          More
+        </button>}
+      </>
     )
   }
   

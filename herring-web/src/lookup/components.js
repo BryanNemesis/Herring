@@ -9,10 +9,13 @@ export function apiFilletAction(filletId, action, callback) {
   lookup('POST', '/fillets/action/', callback, data)
 }
 
-export function apiFilletList(username, callback) {
+export function apiFilletList(username, callback, nextUrl) {
   let endpoint = '/fillets'
   if (username) {
     endpoint += `/?username=${username}`
+  }
+  if (nextUrl) {
+    endpoint = nextUrl.replace('http://localhost:8000/api', '')
   }
   lookup('GET', endpoint, callback)
 }
