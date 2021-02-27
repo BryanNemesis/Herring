@@ -25,12 +25,12 @@ function Fillet({fillet, handleRepost}) {
     }
 
     return (
-      <div className='col-12 col-md-10 mx-auto border rounded py-3 mb-3'>
-        <div className='px-3 text-muted small'>
+      <div className='col-12 col-md-10 mx-auto border rounded py-2 mb-2'>
+        <div className='p-3 text-muted small'>
           <UserPicture username={fillet.user.username}></UserPicture>&nbsp;
           <UserDisplay user={fillet.user} includeFullName></UserDisplay>{filletDisplayPostfix}
         </div>
-        <p className='px-4 my-3'>
+        <p className='px-4'>
           <b>{text}</b>
         </p>
         {fillet.is_repost &&
