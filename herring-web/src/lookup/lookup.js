@@ -24,18 +24,18 @@ function lookup(method, endpoint, callback, data) {
     xhr.responseType = 'json'
     xhr.open(method, url)
     xhr.setRequestHeader('Content-Type', 'application/json')
-    if (method === 'POST') {
-      const csrftoken = getCookie('csrftoken')
-      xhr.setRequestHeader('X-CSRFToken', csrftoken)
-      const sessionid = getCookie('sessionid')
-      xhr.setRequestHeader('X-SessionID', sessionid)
-      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-      xhr.withCredentials = true
-    }
+    const csrftoken = getCookie('csrftoken')
+    xhr.setRequestHeader('X-CSRFToken', csrftoken)
+    const sessionid = getCookie('sessionid')
+    xhr.setRequestHeader('X-SessionID', sessionid)
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+    xhr.withCredentials = true
     xhr.onload = () => {
       if (xhr.status === 403) {
         if (xhr.response.detail === 'Authentication credentials were not provided.') {
-          window.location.href = '/login?showLoginRequired=true'
+          if (window.location.href.indexOf('login') === -1) {
+            window.location.href = '/login?showLoginRequired=true'
+          }
         }
       }
 
