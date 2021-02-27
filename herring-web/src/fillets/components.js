@@ -1,5 +1,6 @@
 import {React, useEffect, useState} from 'react'
 import FilletList from './list'
+import FilletFeedList from './feed'
 import FilletCreateForm from './form'
 import {apiFilletDetail} from '../lookup'
 import Fillet from './detail'
@@ -14,6 +15,19 @@ export function FilletsComponent({username, userCanPost}) {
       {userCanPost &&
       <FilletCreateForm newFillets={newFillets} setNewFillets={setNewFillets} />}
       <FilletList newFillets={newFillets} setNewFillets={setNewFillets} username={username} />
+  </div>
+  )
+}
+
+export function FilletFeedComponent({username, userCanPost}) {
+  const [newFillets, setNewFillets] = useState([])
+  userCanPost = userCanPost === 'true' ? true : false
+
+  return (
+  <div className='col-12 mb-3'>
+      {userCanPost &&
+      <FilletCreateForm newFillets={newFillets} setNewFillets={setNewFillets} />}
+      <FilletFeedList newFillets={newFillets} setNewFillets={setNewFillets} username={username} />
   </div>
   )
 }

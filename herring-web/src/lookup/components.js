@@ -20,6 +20,14 @@ export function apiFilletList(username, callback, nextUrl) {
   lookup('GET', endpoint, callback)
 }
 
+export function apiFilletFeed(callback, nextUrl) {
+  let endpoint = '/fillets/feed'
+  if (nextUrl) {
+    endpoint = nextUrl.replace('http://localhost:8000/api', '')
+  }
+  lookup('GET', endpoint, callback)
+}
+
 export function apiFilletDetail(filletId, callback) {
   lookup('GET', `/fillets/${filletId}/`, callback)
 }

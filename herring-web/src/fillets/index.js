@@ -1,7 +1,8 @@
-import {FilletsComponent, FilletDetailComponent} from './components'
+import {FilletsComponent, FilletFeedComponent, FilletDetailComponent} from './components'
 
 export {
     FilletsComponent,
+    FilletFeedComponent,
     FilletDetailComponent
 }
 
