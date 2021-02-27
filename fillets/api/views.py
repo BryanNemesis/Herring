@@ -90,3 +90,10 @@ def fillet_action_view(request):
             serializer = FilletSerializer(repost)
             return Response(serializer.data, status=201)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def fillet_feed_view(request):
+    qs = Fillet.objects.feed(request.user)
+    serializer = FilletSerializer(qs[:20], many=True)
+    return Response(serializer.data)
