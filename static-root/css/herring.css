@@ -16,3 +16,7 @@
 .btn-sm:hover {
     background-color: #71d4ff;
     }
+
+.pointer {
+    cursor: pointer !important; 
+}
