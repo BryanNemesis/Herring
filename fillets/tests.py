@@ -33,8 +33,13 @@ class FilletTestCase(TestCase):
     def test_action_like(self):
         response = self.client.post('/api/fillets/action/', {'id': 1, 'action': 'like'})
         like_count = response.json().get('like_count')
+        like_instances_count = self.user.filletlike_set.count()
+        related_likes_count = self.user.fillet_user.count()
+        self.assertEqual(like_instances_count, 1)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(like_count, 1)
+        self.assertEqual(related_likes_count, 1)
+
 
     def test_action_unlike(self):
         response = self.client.post('/api/fillets/action/', {'id': 1, 'action': 'like'})
@@ -73,3 +78,9 @@ class FilletTestCase(TestCase):
         self.assertEqual(response.status_code, 404)
         response_incorrect_owner = self.client.delete('/api/fillets/3/delete/')
         self.assertEqual(response_incorrect_owner.status_code, 403)
+
+    def test_fillets_related_name(self):
+        user = self.user
+        self.assertEqual(user.fillets.count(), 2)
+
+    
