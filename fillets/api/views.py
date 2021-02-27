@@ -1,6 +1,7 @@
 from django.conf import settings
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 
 from ..serializers import (
@@ -17,8 +18,7 @@ def fillet_list_view(request):
     username = request.GET.get('username')
     if username:
         qs = qs.filter(user__username__iexact=username)
-    serializer = FilletSerializer(qs[:20], many=True)
-    return Response(serializer.data)
+    return get_paginated_qs_response(qs, request)
 
 
 @api_view(['GET'])
@@ -95,5 +95,12 @@ def fillet_action_view(request):
 @permission_classes([IsAuthenticated])
 def fillet_feed_view(request):
     qs = Fillet.objects.feed(request.user)
-    serializer = FilletSerializer(qs[:20], many=True)
-    return Response(serializer.data)
+    return get_paginated_qs_response(qs, request)
+
+
+def get_paginated_qs_response(qs, request, page_size=10):
+    paginator = PageNumberPagination()
+    paginator.page_size = page_size
+    paginated_qs = paginator.paginate_queryset(qs, request)
+    serializer = FilletSerializer(paginated_qs, many=True)
+    return paginator.get_paginated_response(serializer.data)
