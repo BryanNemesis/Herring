@@ -1,6 +1,7 @@
 from django.conf import settings
 from rest_framework import serializers
 
+from profiles.serializers import PublicProfileSerializer
 from .models import Fillet
 
 
@@ -17,11 +18,18 @@ class FilletActionSerializer(serializers.Serializer):
 
 
 class FilletCreateSerializer(serializers.ModelSerializer):
+    user = PublicProfileSerializer(source='user.profile', read_only=True)
     like_count = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Fillet
-        fields = ['id', 'text', 'like_count']
+        fields = [
+            'id',
+            'text',
+            'user',
+            'like_count',
+            'timestamp',
+            ]
 
     def get_like_count(self, obj):
         return obj.likes.count()
@@ -44,13 +52,21 @@ class FilletCreateSerializer(serializers.ModelSerializer):
 
 
 class FilletSerializer(serializers.ModelSerializer):
+    user = PublicProfileSerializer(source='user.profile', read_only=True)
     like_count = serializers.SerializerMethodField(read_only=True)
     parent = FilletCreateSerializer(read_only=True)
 
     class Meta:
         model = Fillet
-        fields = ['id', 'text', 'like_count', 'is_repost', 'parent']
+        fields = [
+            'id',
+            'text',
+            'user',
+            'like_count',
+            'timestamp',
+            'is_repost',
+            'parent',
+            ]
 
     def get_like_count(self, obj):
         return obj.likes.count()
-
