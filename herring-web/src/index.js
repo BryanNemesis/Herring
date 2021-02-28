@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {FilletsComponent, FilletFeedComponent, FilletDetailComponent} from './fillets'
+import {ProfileBadgeComponent} from './profiles'
 
 const e = React.createElement
 
@@ -21,4 +22,10 @@ const filletDetailElements = document.querySelectorAll('.herring-detail')
 filletDetailElements.forEach(container => {
   ReactDOM.render(
     e(FilletDetailComponent, container.dataset), container)
+})
+
+const profileBadgeElements = document.querySelectorAll('.herring-profile-badge')
+profileBadgeElements.forEach(container => {
+  ReactDOM.render(
+    e(ProfileBadgeComponent, container.dataset), container)
 })

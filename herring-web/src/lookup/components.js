@@ -32,4 +32,13 @@ export function apiFilletDetail(filletId, callback) {
   lookup('GET', `/fillets/${filletId}/`, callback)
 }
 
+export function apiProfileDetail(username, callback) {
+  lookup('GET', `/profiles/${username}/`, callback)
+}
+
+export function apiProfileFollowToggle(username, callback, action) {
+  const data = {action: action.toLowerCase()}
+  lookup('POST', `/profiles/${username}/follow/`, callback, data)
+}
+
 export default apiFilletList

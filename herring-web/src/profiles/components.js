@@ -8,10 +8,10 @@ function UserLink({username, children}) {
     return <span onClick={handleUserLink} className='pointer'>{children}</span>
   }
   
-export function UserPicture({username}) {
+export function UserPicture({user}) {
     return (
-        <UserLink username={username}>
-        <span className='p-1 rounded bg-dark text-white'>&nbsp;{username[0]}&nbsp;</span>
+        <UserLink username={user.username}>
+        <span className='p-1 rounded bg-dark text-white'>&nbsp;{user.username[0]}&nbsp;</span>
         </UserLink>
     )
 }

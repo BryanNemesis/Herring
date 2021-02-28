@@ -1,8 +1,10 @@
 import {UserPicture, UserDisplay} from './components'
+import {ProfileBadgeComponent} from './badge'
 
 export {
     UserPicture,
-    UserDisplay
+    UserDisplay,
+    ProfileBadgeComponent
 }
 
 export default UserDisplay
