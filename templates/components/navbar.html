@@ -1,7 +1,30 @@
-<nav class="navbar navbar-expand-lg bg-herring-light mb-4">
+<nav class="navbar navbar-expand-sm navbar-light bg-herring-light mb-4">
 
-    <a class="navbar-brand display-1 text-dark" href="/">
+    <a class="navbar-brand me-auto display-1 text-dark" href="/">
       <img src="/static/media/Logo.png" length="100" height="50" class='mx-2'>
       Herring
     </a>
+
+    <ul class="navbar-nav ms-auto mx-2">
+      {% if request.user.is_authenticated %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="/profile/edit">Edit profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        
+      {% else %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+
+      {% endif %}
+    </ul>
+      
 </nav>
