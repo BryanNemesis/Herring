@@ -17,6 +17,10 @@
     color: #003e6f;
     }
 
+.btn-sm {
+    box-shadow: none !important;
+}
+
 .btn-sm:hover {
     background-color: #71d4ff;
     }
