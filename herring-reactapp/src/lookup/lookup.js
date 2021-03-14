@@ -20,16 +20,13 @@ function lookup(method, endpoint, callback, data) {
       jsonData = JSON.stringify(data)
     }
     const xhr = new XMLHttpRequest()
-    const url = `http://localhost:8000/api${endpoint}`
+    const url = `${window.location.protocol}//${window.location.host}/api${endpoint}`
     xhr.responseType = 'json'
     xhr.open(method, url)
     xhr.setRequestHeader('Content-Type', 'application/json')
     const csrftoken = getCookie('csrftoken')
     xhr.setRequestHeader('X-CSRFToken', csrftoken)
-    // const sessionid = getCookie('sessionid')
-    // xhr.setRequestHeader('X-SessionID', sessionid)
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-    // xhr.withCredentials = true
     xhr.onload = () => {
       if (xhr.status === 403) {
         if (xhr.response.detail === 'Authentication credentials were not provided.') {
