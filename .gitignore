@@ -2,7 +2,9 @@
 __pycache__/
 .idea/
 .vscode/
-migrations/*
+fillets/migrations/*
+!__init__.py
+profiles/migrations/*
 !__init__.py
 db.sqlite3
 node_modules/
