@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'herring.herokuapp.com']
 
 MAX_FILLET_LENGTH = 255
 
-BAD_WORDS = ['pupa', 'siusiak', 'kurcze', 'kurde']
+BAD_WORDS = ['twitter']
 
 FILLET_ACTION_OPTIONS = ['like', 'unlike', 'repost']
 
