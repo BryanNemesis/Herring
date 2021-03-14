@@ -32,3 +32,7 @@ USER myuser
 RUN python manage.py makemigrations 
 RUN python manage.py migrate
 RUN python manage.py test
+RUN echo "from django.contrib.auth import get_user_model;\
+ User = get_user_model();\
+ User.objects.create_superuser('bryan', '', 'maiden')"\
+ | python manage.py shell
