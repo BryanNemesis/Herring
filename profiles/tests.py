@@ -37,8 +37,8 @@ class ProfileTestCase(TestCase):
             {'action': 'follow'},
         )
         data = response.json()
-        count = data.get('count')
-        self.assertEqual(count, 1)
+        follower_count = data.get('follower_count')
+        self.assertEqual(follower_count, 1)
 
     def test_unfollow_api_endpoint(self):
         user_a = self.user
@@ -49,8 +49,8 @@ class ProfileTestCase(TestCase):
             {'action': 'unfollow'},
         )
         data = response.json()
-        count = data.get('count')
-        self.assertEqual(count, 0)
+        follower_count = data.get('follower_count')
+        self.assertEqual(follower_count, 0)
 
     def test_cannot_follow_self_api_endpoint(self):
         self.get_client()
@@ -58,5 +58,8 @@ class ProfileTestCase(TestCase):
             {'action': 'follow'},
         )
         data = response.json()
-        count = data.get('count')
-        self.assertEqual(count, 0)
+        follower_count = data.get('follower_count')
+        following_count = data.get('following_count')
+        self.assertEqual(follower_count, 0)
+        self.assertEqual(following_count, 0)
+        

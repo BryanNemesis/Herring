@@ -28,7 +28,8 @@ class FilletTestCase(TestCase):
     def test_fillet_list(self):
         response = self.client.get('/api/fillets/')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.json()), 3)
+        self.assertEqual(len(response.json()), 4)
+        self.assertEqual(len(response.json()['results']), 3)
 
     def test_action_like(self):
         response = self.client.post('/api/fillets/action/', {'id': 1, 'action': 'like'})
