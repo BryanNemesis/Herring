@@ -56,10 +56,11 @@ export function FilletFeedList({newFillets, setNewFillets, username}) {
     return (
       <> 
         {fillets.map((x) => {
-          return <Fillet 
+          return <><Fillet 
           fillet={x}
           handleRepost={handleRepost}
           key={x.id} />
+          <hr></hr></>
         })}
         {nextUrl !== null &&
         <button

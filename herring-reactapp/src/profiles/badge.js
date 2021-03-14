@@ -17,12 +17,12 @@ function ProfileBadge({user, didFollowToggle, profileLoading}) {
 
     return user ? (
         <div>
-            <UserPicture user={user} />
-            <p><UserDisplay user={user} includeFullName /></p>
-            <p>{user.country}</p>
-            <p>Followers: <DisplayCount>{user.follower_count}</DisplayCount></p>
-            <p>Following: <DisplayCount>{user.following_count}</DisplayCount></p>
-            <p>{user.bio}</p>
+            <p><UserPicture user={user} />&nbsp;
+            <UserDisplay user={user} includeFullName /></p>
+            <p className='small'>{user.country}</p>
+            <p className='small'>Followers: <DisplayCount>{user.follower_count}</DisplayCount></p>
+            <p className='small'>Following: <DisplayCount>{user.following_count}</DisplayCount></p>
+            <p className='small'>{user.bio}</p>
             <button onClick={handleFollowToggle} className='btn btn-sm btn-dark'>
                 {currentButtonText}
             </button>

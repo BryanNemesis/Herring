@@ -1,0 +1,30 @@
+.bg-herring-dark {
+    background-color: #003e6f;
+    }
+
+.bg-herring-light {
+    background-color: #b5d5e3;
+    }
+
+.btn-dark {
+    background-color: #53859c;
+    border-color: #003e6f;
+    color: #ffffff;
+    }
+
+.btn-light {
+    border-color: #3c5c8c;
+    color: #003e6f;
+    }
+
+.btn-sm {
+    box-shadow: none !important;
+}
+
+.btn-sm:hover {
+    background-color: #71d4ff;
+    }
+
+.pointer {
+    cursor: pointer !important; 
+}

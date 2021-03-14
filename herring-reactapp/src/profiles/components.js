@@ -11,7 +11,7 @@ function UserLink({username, children}) {
 export function UserPicture({user}) {
     return (
         <UserLink username={user.username}>
-        <span className='p-1 rounded bg-dark text-white'>&nbsp;{user.username[0]}&nbsp;</span>
+        <span className='badge bg-dark'>{user.username[0]}</span>
         </UserLink>
     )
 }
@@ -20,7 +20,7 @@ export function UserDisplay({user, includeFullName}) {
     const nameDisplay = `${user.first_name} ${user.last_name}`
     return (
         <>
-        {includeFullName && <>{nameDisplay}&nbsp;</>}
+        {includeFullName && nameDisplay !== ' ' && <>{nameDisplay}&nbsp;</>}
         <UserLink username={user.username}>
             @<b>{user.username}</b>
         </UserLink>

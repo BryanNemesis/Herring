@@ -5,11 +5,16 @@
       Herring
     </a>
 
-    <ul class="navbar-nav ms-auto mx-2">
+    <ul class="navbar-nav ms-auto mx-2 small">
       {% if request.user.is_authenticated %}
 
+
         <li class="nav-item">
-          <a class="nav-link" href="/profile/edit">Edit profile</a>
+          <span class="nav-link disabled">Logged in as <b>{{ request.user.username }}</b></span>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/profiles/edit">Edit profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/logout">Logout</a>

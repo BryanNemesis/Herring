@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 import dj_database_url
-from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
 
-DEBUG = int(os.environ.get('DEBUG', default=0))
+DEBUG = int(os.environ.get('DEBUG', default=1))
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'herring.herokuapp.com']
 
@@ -56,10 +55,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django_session_header.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django_session_header.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django_session_header.middleware.CsrfViewMiddleware',
+    # 'django_session_header.middleware.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -147,26 +148,29 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_CREDENTIALS = True
 CORS_URLS_REGEX = r'^/api/.*$'
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'x-sessionid',
-]
-SESSION_COOKIE_HTTPONLY = False
+# CORS_ALLOW_HEADERS = list(default_headers) + [
+#     'x-sessionid',
+# ]
+# SESSION_COOKIE_HTTPONLY = False
 
 DEFAULT_RENDERER_CLASSES = [
     'rest_framework.renderers.JSONRenderer',
 ]
 
 DEFAULT_AUTHENTICATION_CLASSES = [
-    'django_session_header.authentication.SessionAuthentication',
+    # 'django_session_header.authentication.SessionAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
 ]
 
 if DEBUG:
     DEFAULT_RENDERER_CLASSES += [
         'rest_framework.renderers.BrowsableAPIRenderer',
     ]
-
+    DEFAULT_AUTHENTICATION_CLASSES += [
+        'herring.rest_api.dev.DevAuthentication',
+    ]
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES,

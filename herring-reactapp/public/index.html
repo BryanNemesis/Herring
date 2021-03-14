@@ -29,18 +29,7 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id='fillet-container'></div>
-    <div id="herring" class='container' data-username='bryan' data-user-can-post='true'></div>
-    <script>
-      var path = window.location.pathname
-      var match = path.match(/(?<filletId>\d+)/)
-      if (match) {
-        var filletId = match.groups.filletId
-        var rootElement = document.getElementById('herring')
-        rootElement.className ='d-none'
-        var filletElement = `<div class='herring-detail' data-fillet-id='${filletId}'></div>`
-        var container = document.getElementById('fillet-container')
-        container.innerHTML = filletElement
-      }
-    </script>
+    <div id="badge" class='herring-profile-badge' data-username='bryan'></div>
+    <div id="herring-feed" class='herring-feed' data-username='bryan' data-user-can-post='true'></div>
   </body>
 </html>

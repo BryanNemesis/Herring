@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p class='col-10 mx-auto pb-4 display-6'>Profile of user {{ username }}</p>
-    <div id="herring" class='container' data-username={{ username }} data-user-can-post='false'></div>
+
+<div class="herring-profile-badge p-3" data-username="{{ username }}" ></div>
+
+<div id='herring' 
+data-username="{{ username }}"
+data-user-can-post="false"></div>
+
 {% endblock content %}

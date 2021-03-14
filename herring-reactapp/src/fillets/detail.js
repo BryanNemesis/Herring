@@ -25,16 +25,16 @@ function Fillet({fillet, handleRepost}) {
     }
 
     return (
-      <div className='col-12 col-md-10 mx-auto border rounded py-2 mb-2'>
-        <div className='p-3 text-muted small'>
+      <div className='col-12 col-md-10 mx-auto py-2'>
+        <div className='px-3 text-muted small'>
           <UserPicture user={fillet.user}></UserPicture>&nbsp;
           <UserDisplay user={fillet.user} includeFullName></UserDisplay>{filletDisplayPostfix}
         </div>
-        <p className='px-4'>
+        { fillet.text !== '' && <p className='px-3 mb-0 py-2'>
           <b>{text}</b>
-        </p>
+        </p>}
         {fillet.is_repost &&
-        <div className='col-9'><Fillet fillet={currentFillet.parent} handleRepost={handleRepost}/></div>}
+        <div className='col-10'><Fillet fillet={currentFillet.parent} handleRepost={handleRepost}/></div>}
         {currentFillet && <div className='btn btn-group'>
           <ActionButton
             fillet={currentFillet}

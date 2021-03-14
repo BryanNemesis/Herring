@@ -3,7 +3,7 @@
 {% block content %}
     {% if request.user.is_authenticated %}
         <div id="herring-feed" class='container' data-user-can-post='true'></div>
-    {% else %}
-        <div id="herring" class='container'></div>
     {% endif %}
+    <p class='display-5 mx-5 container'>All fillets</p>
+    <div id="herring" class='container'></div>
 {% endblock content %}

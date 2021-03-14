@@ -26,10 +26,10 @@ function lookup(method, endpoint, callback, data) {
     xhr.setRequestHeader('Content-Type', 'application/json')
     const csrftoken = getCookie('csrftoken')
     xhr.setRequestHeader('X-CSRFToken', csrftoken)
-    const sessionid = getCookie('sessionid')
-    xhr.setRequestHeader('X-SessionID', sessionid)
+    // const sessionid = getCookie('sessionid')
+    // xhr.setRequestHeader('X-SessionID', sessionid)
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-    xhr.withCredentials = true
+    // xhr.withCredentials = true
     xhr.onload = () => {
       if (xhr.status === 403) {
         if (xhr.response.detail === 'Authentication credentials were not provided.') {
