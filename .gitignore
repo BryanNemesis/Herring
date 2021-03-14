@@ -2,7 +2,8 @@
 __pycache__/
 .idea/
 .vscode/
-migrations/
+migrations/*
+!__init__.py
 db.sqlite3
 node_modules/
 .pnp
